@@ -752,7 +752,7 @@
 <style>
 #grant-modal { display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity 0.2s; }
 #grant-modal.gd-visible { opacity:1; }
-#grant-modal-card { background:#fff;border-radius:16px;width:100%;max-width:660px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.25);display:none;flex-direction:column; }
+#grant-modal-card { background:#fff;border-radius:16px;width:100%;max-width:660px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.25);display:flex;flex-direction:column; }
 .gd-header { display:flex;align-items:flex-start;justify-content:space-between;padding:22px 24px 16px;border-bottom:1px solid var(--border);gap:16px; }
 .gd-grant-name { font-size:16px;font-weight:800;color:var(--brown);line-height:1.3; }
 .gd-grant-url { font-size:12px;color:var(--gold);text-decoration:none;margin-top:4px;display:block; }
@@ -1210,7 +1210,7 @@ function tmCopyAIPrompt(topic) {
   if (d.cash) ctx.push('cash on hand $' + d.cash);
   if (d.staff) ctx.push(d.staff + ' staff');
   var ctxStr = ctx.length ? '\n\nBusiness context: ' + ctx.join(', ') + '.' : '';
-  var AI_PROMPTS = {"strategy":"I own a Nigerian Catering & Event Services business in Maryland, MD called Nifaze A Services. Walk me through the highest-impact growth moves I should make in the next 90 days, and what I should skip. Be specific to my situation.","grants":"I own Nifaze A Services in Maryland, MD. What grants and funding programs should I be applying to right now? Focus on programs relevant to a Nigerian Catering & Event Services business, women-owned.","revenue":"I run Nifaze A Services, a Nigerian Catering & Event Services business. Help me identify which revenue channels I should prioritize in the next 30-90 days — and which ones to skip for now.","site":"I have a Nigerian Catering & Event Services business called Nifaze A Services. What are the highest-impact changes I can make to my website and online presence in the next week to get more customers?"};
+  var AI_PROMPTS = {"strategy":"I own a Nigerian Catering & Event Services business in Upper Marlboro, MD called Nifaze A Services. Walk me through the highest-impact growth moves I should make in the next 90 days, and what I should skip. Be specific to my situation.","grants":"I own Nifaze A Services in Upper Marlboro, MD. What grants and funding programs should I be applying to right now? Focus on programs relevant to a Nigerian Catering & Event Services business, women-owned.","revenue":"I run Nifaze A Services, a Nigerian Catering & Event Services business. Help me identify which revenue channels I should prioritize in the next 30-90 days — and which ones to skip for now.","site":"I have a Nigerian Catering & Event Services business called Nifaze A Services. What are the highest-impact changes I can make to my website and online presence in the next week to get more customers?"};
   var text = prompts[topic] || prompts.strategy;
   navigator.clipboard.writeText(text).then(function() {
     var toast = document.getElementById('tm-ai-toast');
@@ -1298,10 +1298,10 @@ document.getElementById('pw-input').focus();
   <div class="hero-badges">
     <span class="badge">Women Owned</span>
     <span class="badge">Minority Owned</span>
-    <span class="badge">Maryland, MD</span>
+    <span class="badge">Upper Marlboro, MD</span>
   </div>
   <div class="hero-meta">From Michael Eisinger · Wandering With Pride · April 2026</div>
-  <div class="hero-meta" style="margin-top:6px;"> · Maryland, MD</div>
+  <div class="hero-meta" style="margin-top:6px;"> · Upper Marlboro, MD</div>
 </div>
 
 <!-- HOW TO USE THIS -->
@@ -1835,7 +1835,7 @@ document.getElementById('pw-input').focus();
     <div style="margin-top: 32px;">
       <div class="section-label" style="margin-bottom: 12px;">Prepare Once, Reuse Everywhere</div>
       <div class="assets-list">
-        <div class="assets-list-item">Business summary: 3 years in business, Nigerian Catering & Event Services, based in Maryland, MD — Women-owned · Minority-owned</div>
+        <div class="assets-list-item">Business summary: 3 years in business, Nigerian Catering & Event Services, based in Upper Marlboro, MD — Women-owned · Minority-owned</div>
         <div class="assets-list-item">LGBTQ+- and women-owned certification documentation</div>
         <div class="assets-list-item">Annual revenue range — most programs just need "under $350K" threshold, no exact figure required</div>
         <div class="assets-list-item">Mission statement: inclusive workplace, LGBTQ+ employer, community presence</div>
@@ -2729,10 +2729,10 @@ document.getElementById('pw-input').focus();
         </div>
         <ul class="ad-list">
           <li><strong>TV credential is your pitch hook.</strong> Every food editor already sees you as media-validated — lead with that in every pitch.</li>
-          <li><strong>Target outlets:</strong> Food52 Gift Guide, Bon Appétit Holiday Gifts, local food press in Maryland, MD</li>
+          <li><strong>Target outlets:</strong> Food52 Gift Guide, Bon Appétit Holiday Gifts, local food press in Upper Marlboro, MD</li>
           <li><strong>Pitch timing:</strong> July–September for holiday gift guides (deadlines are months before publication). Spring pitches target Mother's Day + graduation gift roundups.</li>
           
-          <li><strong>Pitch template:</strong> 3 sentences max. "Nifaze A Services — Nigerian Catering & Event Services, Women-owned · Minority-owned, 3+ years in Maryland, MD. Would love to send samples for consideration in [publication]'s gift guide." Include direct shop link + photos.</li>
+          <li><strong>Pitch template:</strong> 3 sentences max. "Nifaze A Services — Nigerian Catering & Event Services, Women-owned · Minority-owned, 3+ years in Upper Marlboro, MD. Would love to send samples for consideration in [publication]'s gift guide." Include direct shop link + photos.</li>
           <li><strong>Send samples.</strong> Editors who receive physical product include it at a dramatically higher rate than those who only see photos.</li>
         </ul>
       </div>
@@ -6012,7 +6012,7 @@ function tmSubmitFeedback() {
 
 <script>
 var TM_CHAT_HISTORY = [];
-var TM_CHAT_SYSTEM = `You are a growth strategy AI assistant for Nifaze A Services, a Nigerian Catering & Event Services business in Maryland, MD. The owner is Nifaze.
+var TM_CHAT_SYSTEM = `You are a growth strategy AI assistant for Nifaze A Services, a Nigerian Catering & Event Services business in Upper Marlboro, MD. The owner is Nifaze.
 
 Business overview:
 - Type: food | Industry: Nigerian Catering & Event Services
@@ -6029,7 +6029,7 @@ TikTok presence (as of April 2026):
 - Avg views: 9,000
 
 Research findings:
-Home-based Nigerian catering and events business in Maryland (240 area code = Montgomery County/PG County). Owner goes by 'Nifaze' — business is named after her. Services include Nigerian cakes, pastries, smallchops (party finger foods), shawarma, event decor, and food catering. TikTok bio: 'Nigerian Cakes & Pastries | Event Decor | Smallchops & Food in Maryland, Shawarma Call/Text: 240-714-2394. Join My Network and Learn My Recipe.' Top TikTok videos: 76.4K and 55.5K views — strong content but no conversion infrastructure. Instagram @nifaze has 250 posts but only 241 followers. No website, no Google Business Profile, no online ordering. Women-owned and minority-owned (Black woman entrepreneur). The phone number in the TikTok bio is the primary booking channel. No email address publicly listed.
+Home-based Nigerian catering and events business in Upper Marlboro, MD (Prince George's County). Owner goes by 'Nifaze' — business is named after her. Nigerian immigrant background — she makes Nigerian food in Maryland for the diaspora community. Services include Nigerian cakes, pastries, smallchops (party finger foods), shawarma, event decor, and food catering. TikTok bio: 'Nigerian Cakes & Pastries | Event Decor | Smallchops & Food in Maryland, Shawarma Call/Text: 240-714-2394. Join My Network and Learn My Recipe.' Top TikTok videos: 76.5K views (Efo riro & Jollof rice, Upper Marlboro location tag) and 55.6K views (Jollof & fried rice) — strong content but no conversion infrastructure. Instagram @nifaze has 250 posts but only 241 followers. No website, no Google Business Profile, no online ordering. Women-owned and minority-owned (Black Nigerian woman entrepreneur). The phone number in the TikTok bio is the primary booking channel. No email address publicly listed. Potential disability disclosure — noted by client contact but not yet confirmed from public videos.
 
 Opportunity:
 13.5K TikTok followers and viral content up to 76K views — but zero online booking, no website, and no Google presence means most of that reach converts to nothing. Adding a Google Business Profile, a simple booking page, and an email capture could turn social media fame into a full calendar of catering orders.
