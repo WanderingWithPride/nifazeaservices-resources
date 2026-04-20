@@ -124,6 +124,28 @@
 
 <div id="root"></div>
 
+<!-- Persistent "Ask" floating action button — visible from anywhere, jumps to chatbot -->
+<button id="wb-ask-fab" type="button" aria-label="Ask WanderBrief" onclick="(function(){var el=document.getElementById('chat');if(el){el.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(function(){var i=el.querySelector('input[type=text]');if(i)i.focus();},700);}})()">
+  <span aria-hidden="true" style="font-size:18px;line-height:1">✦</span>
+  <span>Ask WanderBrief</span>
+</button>
+<style>
+  #wb-ask-fab {
+    position: fixed; right: 22px; bottom: 22px; z-index: 90;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink); color: var(--paper);
+    border: 1px solid var(--ink); border-radius: 999px;
+    padding: 12px 18px;
+    font-family: var(--ff-mono); font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer; box-shadow: 0 12px 32px rgba(17,17,14,0.28);
+    transition: transform 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  #wb-ask-fab:hover { transform: translateY(-2px); background: var(--accent); color: var(--paper); border-color: var(--accent); }
+  @media print { #wb-ask-fab { display: none !important; } }
+  @media (max-width: 640px) { #wb-ask-fab { padding: 10px 14px; font-size: 11px; } }
+</style>
+
 <!-- Client config (single-client for this page) -->
 <script id="wb-client">
 window.WB_CLIENTS = {"nifazeaservices":{"_comment":"Nifaze A Services — Maryland — draft 2026-04-17","handle":"@nifazeaservices","client_name":"Nifaze","business_name":"Nifaze A Services","business_type":"food","city":"Upper Marlboro","state":"MD","industry":"Nigerian Catering & Event Services","primary_color":"#C0392B","secondary_color":"#FEF9F0","accent_color":"#D4AC0D","logo_url":null,"avg_job_value":150,"monthly_revenue_est":3000,"hours":"By appointment","services":["Nigerian cakes & custom cakes","Pastries & baked goods","Smallchops (party appetizers)","Shawarma","Event decor & styling","Nigerian food catering","Recipe network & cooking classes"],"customer_types":["Event & party hosts","Wedding clients","Nigerian community","Corporate catering","Local Maryland residents"],"employee_count":0,"years_in_business":3,"phone":"(240) 714-2394","email":"michael.eisinger@wanderingwithpride.com","website":null,"tiktok_url":"https://www.tiktok.com/@nifazeaservices","instagram_url":"https://www.instagram.com/nifaze","google_maps_url":null,"lgbtq_owned":false,"women_owned":true,"veteran_owned":false,"minority_owned":true,"disability_hiring":true,"shop_based":false,"fleet_based":false,"texas_business":false,"has_employees":false,"tiktok_followers":13500,"tiktok_avg_views":9000,"tiktok_top_video":"https://www.tiktok.com/@nifazeaservices (76.4K views — Nigerian food in Maryland intro video)","website_score":"F — no website exists","google_rating":null,"google_review_count":null,"research_notes":"Home-based Nigerian catering and events business in Upper Marlboro, MD (Prince George's County). Owner goes by 'Nifaze' — business is named after her. Nigerian immigrant background — she makes Nigerian food in Maryland for the diaspora community. Services include Nigerian cakes, pastries, smallchops (party finger foods), shawarma, event decor, and food catering. TikTok bio: 'Nigerian Cakes & Pastries | Event Decor | Smallchops & Food in Maryland, Shawarma Call/Text: 240-714-2394. Join My Network and Learn My Recipe.' Top TikTok videos: 76.5K views (Efo riro & Jollof rice, Upper Marlboro location tag) and 55.6K views (Jollof & fried rice). KEY INSIGHT: Every single video opens with the same 60-second engagement plea — 'I've been really struggling with visibility. My content is great and I show up daily but still there is no change. Please like and comment so TikTok shows my content to more people.' She has been fighting the algorithm manually on every post. This means: (1) she knows her content is good and is frustrated by distribution, (2) this plea script is suppressing her reach further (TikTok deprioritizes begging-for-engagement content), (3) she has no idea this approach is backfiring. No website, no Google Business Profile, no online ordering. Women-owned and minority-owned (Black Nigerian woman entrepreneur). Phone number in TikTok bio is primary booking channel. No email publicly listed. Disability disclosure confirmed via direct DM from Michael's conversation with her — update disability_hiring field when confirmed.","opportunity_summary":"13.5K TikTok followers and viral content up to 76K views — but zero online booking, no website, and no Google presence means most of that reach converts to nothing. Adding a Google Business Profile, a simple booking page, and an email capture could turn social media fame into a full calendar of catering orders.","phase0_actions":["Claim your Google Business Profile today — you are invisible to local searches right now","Add a Linktree or simple booking link to your TikTok bio so viewers can book without calling","Add an email address to your TikTok and Instagram bio for professional inquiries","Create a simple pricing menu graphic and pin it to your TikTok profile","Reply with a booking CTA ('DM to book!') on your top 5 videos to recapture lost traffic"],"password":"v3u4ebqm","netlify_site_id":null,"page_url":"https://wanderingwithpride.github.io/nifazeaservices-resources/","delivered_at":"2026-04-17","status":"delivered","theme":{"paper":"#F8EFDD","paper_hi":"#FCF5E7","paper_lo":"#ECDFC3","paper_card":"#FFF9EB","ink":"#2A1410","ink_soft":"#44221B","ink_mid":"#765545","ink_fade":"#A6927C","rule":"#2A1410","rule_soft":"rgba(42,20,16,0.12)","rule_hair":"rgba(42,20,16,0.06)","accent":"#C0392B","accent_ink":"#6B1F16","accent_wash":"rgba(192,57,43,0.08)","accent_ghost":"rgba(192,57,43,0.22)","accent_2":"#D4AC0D","display_font":"EB Garamond","stamp_text":"Delivered By Hand · 001","grain":0.06},"ai":{"live_chatbot":true,"live_polish":true,"provider_override":null},"one_line_verdict":"The audience is already there. The reason it's not converting is that the engagement-plea script opening every video is suppressing you. Stop saying it.","gate_emoji":"🍲","wotc_eligible":false,"ada_credit_applicable":false,"kiva_eligible":true,"sba_eligible":true,"green_energy_applicable":false}};
@@ -2179,9 +2201,20 @@ function Chatbot({ client }) {
     setError(null);
 
     const system = window.WB_buildSystemPrompt(client, numbers);
+    // The Worker has its own hardcoded system prompt (generic Growth OS assistant) and
+    // ignores the `system` field, so Gemini gets no dossier context. Workaround: embed
+    // the dossier as preamble on the LATEST user message. Earlier turns keep their text.
+    const msgs = convo.filter(m => m.role !== 'system');
+    const lastIdx = msgs.map(m => m.role).lastIndexOf('user');
+    if (lastIdx >= 0) {
+      msgs[lastIdx] = {
+        ...msgs[lastIdx],
+        content: `[Dossier context — use this to answer, do not repeat it back]\n${system}\n[/Dossier context]\n\nMy question: ${msgs[lastIdx].content}`,
+      };
+    }
     const body = {
       system,
-      messages: convo.filter(m => m.role !== 'system'),
+      messages: msgs,
       session_id: sessionRef.current,
     };
 
