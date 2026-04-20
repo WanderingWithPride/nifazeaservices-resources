@@ -2757,6 +2757,7 @@ function App() {
         `}</style>
       </footer>
 
+      {typeof FloatingChat !== "undefined" && <FloatingChat client={client} />}
       </React.Fragment>
   );
 }
